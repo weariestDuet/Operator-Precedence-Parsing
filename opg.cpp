@@ -18,8 +18,7 @@ int matrix[6][6] = {
 
 bool isTerminal(char c)
 {
-    if(c!='N') return true;
-	return false;
+    return c=='+'||c=='*'|c=='('||c==')'||c=='i'||c=='#';
 }
 
 int getPr(char c)
@@ -85,7 +84,7 @@ int main()
     input[len+1]='\0';
     store[top++]='#';
     int i=0;
-    for(int i=0;i<len;)
+    while(i<=len)
     {
         int t = top-1;
         while (t >= 0 && !isTerminal(store[t]))
