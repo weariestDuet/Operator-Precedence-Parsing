@@ -120,7 +120,5 @@ int main()
         }
     }
 
-    if(top > 2)
-        cout<<"RE"<<endl;
     return 0;
 }
