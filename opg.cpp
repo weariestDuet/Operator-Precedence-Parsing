@@ -78,7 +78,7 @@ bool reduce()
 
 int main()
 {
-    scanf("%s", input);
+    cin >> input;
     int len = strlen(input);
     input[len] = '#';
     input[len+1] = '\0';
