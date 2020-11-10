@@ -24,7 +24,7 @@ int isTerminal(char c)
 
 int reduce()
 {
-    if(top <= 1) return false; // 此时栈中只有'#'
+    if(top <= 1) return false; 
     else if(store[top-1] == 'i')
     {
         printf("R\n");
@@ -37,7 +37,18 @@ int reduce()
         top-=3;
         store[top++] = 'N';
     }
-
+    else if(store[top-1] == 'N')
+    {
+        if(top>3&&store[top-3]=='N'&&(store[top-2] == '*'||'+'))
+        {
+            printf("R\n");
+            top -= 3;
+            store[top++] = 'N';
+        }
+        else {
+            return false;
+        }
+    }
     else if(store[top-1] == 'N')
         return true;
     else return false;
@@ -71,7 +82,7 @@ int main()
     input[len] = '#';
     input[len+1] = '\0';
     top = 0;
-    // 先将开始符号移动入栈
+   
     store[top++] = '#';
     int i=0;
     while (i<=len)
@@ -100,6 +111,6 @@ int main()
         }
     }
 
-    if(top > 2) printf("RE\n");
+   
     return 0;
 }
