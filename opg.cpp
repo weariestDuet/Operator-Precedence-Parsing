@@ -111,6 +111,6 @@ int main()
         }
     }
 
-   
+    if(top > 2) printf("RE\n");
     return 0;
 }
