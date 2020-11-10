@@ -48,21 +48,21 @@ bool reduce()
     if(top <= 1) return false; 
     else if(store[top-1] == 'i')
     {
-        printf("R\n");
+        cout<<"R"<<endl;
         store[top-1] = 'N';
     }
     else if(store[top-1] == ')')
     {
         if(top<=3||store[top-3]!='('||store[top-2]!='N') return false;
-        printf("R\n");
+        cout<<"R"<<endl;
         top-=3;
         store[top++] = 'N';
     }
     else if(store[top-1] == 'N')
     {
-        if(top>3&&store[top-3]=='N'&&(store[top-2] == '*'||'+'))
+        if(top>3&&store[top-3]=='N'&&(store[top-2]=='*'||store[top-2]=='+'))
         {
-            printf("R\n");
+            cout<<"R"<<endl;
             top -= 3;
             store[top++] = 'N';
         }
@@ -121,7 +121,7 @@ int main()
         }
     }
 
-    // if(top > 2)
-    //     cout<<"RE"<<endl;
+    if(top > 2)
+        cout<<"RE"<<endl;
     return 0;
 }
