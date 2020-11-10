@@ -1,10 +1,10 @@
 #include <iostream>
-#include <cstring>
-#include <cstdio>
+#include <string>
+
 
 using namespace std;
 
-char input[1001];
+
 char store[1001];
 int top = 0;
 int matrix[6][6] = {
@@ -78,40 +78,48 @@ bool reduce()
 
 int main()
 {
-    cin >> input;
-    int len = strlen(input);
-    input[len] = '#';
-    input[len+1] = '\0';
+    std::string input;
+    std::cin >> input;
     top = 0;
-   
     store[top++] = '#';
     int i=0;
-    while (i<=len)
+    for(int i=0;i<input.size();)
     {
         int t = top-1;
         while (t >= 0 && !isTerminal(store[t]))
             t--;
-        if (t < 0)
-            return printf("RE\n"), 0;
+        if (t < 0){
+            cout<<"RE"<<endl;
+            break;
+        }
         int u = getPr(store[t]);
         int v = getPr(store[i]); 
-        if (v == -1 || u == -1 || matrix[u][v] == -2)
-            return printf("E\n"), 0;
+        if (v == -1 || u == -1 || matrix[u][v] == -2){
+            cout<<"E"<<endl;
+            break;
+        }
         if(v == 5 && u == 5) break;
         if (matrix[u][v] <= 0) 
         {
-            printf("I%c\n",store[i]);
+            cout<<"I"<<store[i]<<endl;
             store[top++] = store[i];
             i++;
         }
         else
         { 
-            if(top < 2) return printf("RE\n"),0;
+            if(top < 2){
+                cout<<"RE"<<endl;
+                break;
+            }
 
-            if(!reduce()) return printf("RE\n"),0;
+            if(!reduce()){
+                cout<<"RE"<<endl;
+                break;
+            }
         }
     }
 
-    if(top > 2) printf("RE\n");
+    if(top > 2)
+        cout<<"RE"<<endl;
     return 0;
 }
