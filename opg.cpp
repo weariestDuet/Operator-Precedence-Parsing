@@ -7,7 +7,7 @@ using namespace std;
 char input[1001];
 char store[1001];
 int top = 0;
-int matrix[6][7] = {
+int matrix[6][6] = {
     { 1,-1,-1, 1,-1, 1},
     { 1, 1,-1, 1,-1, 1},
     {-1,-1,-1, 0,-1,-2},
@@ -16,13 +16,34 @@ int matrix[6][7] = {
     {-1,-1,-1,-1,-1, 0}
 };
 
-int isTerminal(char c)
+bool isTerminal(char c)
 {
-    if(c!='N') return 1;
-	return 0;
+    if(c!='N') return true;
+	return false;
 }
 
-int reduce()
+int getPr(char c)
+{
+    switch (c)
+    {
+    case '+':
+        return 0;
+    case '*':
+        return 1;
+    case '(':
+        return 2;
+    case ')':
+        return 3;
+    case 'i':
+        return 4;
+    case '#':
+        return 5;
+    default:
+        return -1;
+    }
+}
+
+bool reduce()
 {
     if(top <= 1) return false; 
     else if(store[top-1] == 'i')
@@ -53,26 +74,6 @@ int reduce()
         return true;
     else return false;
     return true;
-}
-int getPr(char c)
-{
-    switch (c)
-    {
-    case '+':
-        return 0;
-    case '*':
-        return 1;
-    case '(':
-        return 2;
-    case ')':
-        return 3;
-    case 'i':
-        return 4;
-    case '#':
-        return 5;
-    default:
-        return -1;
-    }
 }
 
 int main()
